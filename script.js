@@ -20,20 +20,35 @@ document.getElementById("city-search-form").addEventListener("submit", function(
 // API Call
 function getWeatherdata(cityNameformatted) {
     var APIKey = "272144b5a50ef7e9a6cec649a29117c0";
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityNameformatted + "&appid=" + APIKey;
-    
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityNameformatted + "&appid=" + APIKey + "&units=imperial";
+
     fetch(queryURL)
         .then(function (response) {
-            return response.json();  
-            })
-        .then(function (data){
-            longitude = data.coord.lon;
-            latitude = data.coord.lat;
-            console.log(latitude);
-            fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial";
-            console.log(fiveDayURL)
-         
+        return response.json();
         })
+        .then(function (data) {
+            todaysData = data;
+            console.log(todaysData)
+            displayToday(data);
+        });
+    }
+
+    function displayToday(data) {
+       var hightemp = data.main.temp_max;
+       console.log(hightemp)
+       
+    }
+
+ 
+    // fetch(fiveDayURL)
+    //     .then(function(response2) {
+    //         return response2.json();
+    //     })
+    //     .then(function)(data2) {
+
+
+    //     }
+    //     }
         // .then(function (response2) {
         //     return response2.json();  // Use json() instead of JSON()
         // })
@@ -45,7 +60,7 @@ function getWeatherdata(cityNameformatted) {
         //     // Handle any errors that occurred in the fetch requests
         //     console.error('Error:', error);
         // });
-}
+
               
             
             
