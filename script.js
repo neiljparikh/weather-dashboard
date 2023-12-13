@@ -70,13 +70,17 @@ function getTodaysdata(cityNameformatted) {
             fivedayData = data2;
             console.log(fivedayData)
         
-        day1 = [];
-        
-        for (i = 4; i < fivedayData.list.length; i += 8) {
-        var day1 = fivedayData.list[i].main.temp;
-        console.log(day1)
-            }
-          
+        fiveDaystorage = [];
+
+        for (var i = 4; i < fivedayData.list.length; i += 8) { 
+            var dayData = {
+        temp: fivedayData.list[i].main.temp,
+        wind: fivedayData.list[i].wind.speed,
+        humidity: fivedayData.list[i].main.humidity
+        };
+        fiveDaystorage.push(dayData);
+    }
+        console.log(fiveDaystorage)
             
 
 
