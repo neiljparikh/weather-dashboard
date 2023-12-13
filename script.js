@@ -74,10 +74,10 @@ function getTodaysdata(cityNameformatted) {
 
         for (var i = 4; i < fivedayData.list.length; i += 8) { 
             var dayData = {
-        temp: fivedayData.list[i].main.temp,
-        wind: fivedayData.list[i].wind.speed,
-        humidity: fivedayData.list[i].main.humidity
-        };
+                temp: fivedayData.list[i].main.temp,
+                wind: fivedayData.list[i].wind.speed,
+                humidity: fivedayData.list[i].main.humidity
+            };
         fiveDaystorage.push(dayData);
     }
         console.log(fiveDaystorage)
