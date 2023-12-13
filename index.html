@@ -13,7 +13,7 @@
 <body>
 
 <header> 
-    <h1> Weather Dashboard</h1>
+    <h1 id="title"> Weather Dashboard</h1>
 </header>
     
 
@@ -43,15 +43,16 @@
 <!-- End of Container -->
 </div>
 
-<div class="col-9">
- <div class="col-9">
-          <div class="row justify-content-between">
-            <div class="row">
-              <div id="city-searched-heading"
-                class="mb-4 border border-dark col-12"
-                id="today-forecast"
 
-              ></div>
+ <div class="col-9">
+        <div class="row justify-content-between">
+            <div class="row">
+              <div id="city-searched-heading" class="mb-4 border border-dark col-12"></div> 
+                <div id="todays-forecast"> 
+                  <!-- <p id="todays-data"></p> -->
+                </div>
+
+        
             </div>
             <div class="row justify-content-between 5-day-forecast">
               <h3 class="px-0">5 Day Forecast:</h3>
@@ -79,6 +80,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="./script.js"></script>
-
+<script
+        src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+        crossorigin="anonymous">
+</script>
 </body>
 </html>

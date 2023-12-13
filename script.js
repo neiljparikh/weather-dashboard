@@ -1,9 +1,7 @@
 //DEPENDENCIES
 var citySearchform = document.getElementById('city-search-form');
 var cityHeading = document.getElementById('city-searched-heading');
-
-
-//DATA
+var APIKey = "272144b5a50ef7e9a6cec649a29117c0";
 
 
 //FUNCTIONS
@@ -14,12 +12,14 @@ document.getElementById("city-search-form").addEventListener("submit", function(
     var cityName = document.getElementById('city-inputted').value;
     //Code below solves for formatting issues when enterting cities that are more than one word
     var cityNameformatted = cityName.split(" ").join("+")
-    getWeatherdata(cityNameformatted);
+    getTodaysdata(cityNameformatted);
+    getFivedaydata(cityNameformatted);
+
 });
 
 // API Call
-function getWeatherdata(cityNameformatted) {
-    var APIKey = "272144b5a50ef7e9a6cec649a29117c0";
+function getTodaysdata(cityNameformatted) {
+   
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityNameformatted + "&appid=" + APIKey + "&units=imperial";
 
     fetch(queryURL)
@@ -29,38 +29,69 @@ function getWeatherdata(cityNameformatted) {
         .then(function (data) {
             todaysData = data;
             console.log(todaysData)
-            displayToday(data);
+            displayToday(data)
+         
         });
     }
 
     function displayToday(data) {
-       var hightemp = data.main.temp_max;
-       console.log(hightemp)
+        cityHeading.innerHTML = "";
+        var todaysdate = dayjs.unix(data.dt).format("MM/DD/YYYY");
+ 
+        
        
+        
+
+        cityName = document.getElementById('city-inputted').value;
+        
+        var todaysForecast = document.getElementById('todays-forecast');
+       
+        todaysForecast.innerHTML = `
+        <span>
+        <h1>${cityName} (${todaysdate})</h1>
+        <img src='https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png' width='100' height='100'>
+         </span>
+        <p>Current Temp: ${data.main.temp}°C</p>
+        <p>Wind: ${data.wind.speed} m/s</p>
+        <p>Humidity: ${data.main.humidity}%</p>
+    `;
+
+    }
+       
+    function getFivedaydata(cityNameformatted) {
+        var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityNameformatted + "&appid=" + APIKey + "&units=imperial";
+        console.log(fiveDayURL)
+        
+        fetch(fiveDayURL)
+        .then(function (response2) {
+        return response2.json();
+        })
+        .then(function (data2) {
+            fivedayData = data2;
+            console.log(fivedayData)
+        
+        day1 = [];
+        
+        for (i = 4; i < fivedayData.list.length; i += 8) {
+        var day1 = fivedayData.list[i].main.temp;
+        console.log(day1)
+            }
+          
+            
+
+
+        });
+          
     }
 
- 
-    // fetch(fiveDayURL)
-    //     .then(function(response2) {
-    //         return response2.json();
-    //     })
-    //     .then(function)(data2) {
+    
+  
+    
+   
+    
 
-
-    //     }
-    //     }
-        // .then(function (response2) {
-        //     return response2.json();  // Use json() instead of JSON()
-        // })
-        // .then(function (data2) {
-        //     // Process data for the five-day forecast here
-        //     console.log(data2);
-        // })
-        // .catch(function (error) {
-        //     // Handle any errors that occurred in the fetch requests
-        //     console.error('Error:', error);
-        // });
-
+    
+  
               
             
             
