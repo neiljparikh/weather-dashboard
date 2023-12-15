@@ -32,5 +32,9 @@ p {
 }
 
 h1 {
-    font-size: 180% !important
+    font-size: 180% !important;
+}
+
+#day1, #day2, #day3, #day4, #day5 {
+    align-items: center !important;
 }

@@ -2,7 +2,7 @@
 var citySearchform = document.getElementById('city-search-form');
 var cityHeading = document.getElementById('city-searched-heading');
 var APIKey = "272144b5a50ef7e9a6cec649a29117c0";
-var todaysDate;
+todaysDate = dayjs().format("MM/DD/YYYY");
 
 //FUNCTIONS
 
@@ -28,8 +28,7 @@ function getTodaysdata(cityNameformatted) {
         })
         .then(function (data) {
             todaysData = data;
-            console.log(todaysData)
-            todaysDate = dayjs().format("MM/DD/YYYY");
+            console.log(todaysData)       
             displayToday(data);
          
         });
@@ -77,13 +76,49 @@ function getTodaysdata(cityNameformatted) {
             };
         fiveDaystorage.push(dayData);
         console.log(fiveDaystorage)
+        console.log(fiveDaystorage[0].date)
     }
-        var citySearchform = document.getElementById('city-search-form');
-        var cityHeading = document.getElementById('city-searched-heading');
-        var APIKey = "272144b5a50ef7e9a6cec649a29117c0";
-})
-// var todaysdate = dayjs.unix(data.dt).format("MM/DD/YYYY");
+  
+       
+            var displayDayOne = document.getElementById('day1')
+            displayDayOne.innerHTML = `<h1> ${dayjs.unix(fiveDaystorage[0].date).format('MM/DD/YYYY')} </h1>
+            <img src='https://openweathermap.org/img/wn/${fiveDaystorage[0].icon}@2x.png' width='100' height='100'>
+            <h4> ${fiveDaystorage[0].temp}°F </h4>
+            <h4> ${fiveDaystorage[0].wind} m/s </h4>
+            <h4> ${fiveDaystorage[0].humidity}% </h4>`
+      
 
+            var displayDayTwo = document.getElementById('day2')
+            displayDayTwo.innerHTML = `<h1> ${dayjs.unix(fiveDaystorage[1].date).format('MM/DD/YYYY')} </h1>
+            <img src='https://openweathermap.org/img/wn/${fiveDaystorage[1].icon}@2x.png' width='100' height='100'>
+            <h4> ${fiveDaystorage[1].temp}°F </h4>
+            <h4> ${fiveDaystorage[1].wind} m/s </h4>
+            <h4> ${fiveDaystorage[1].humidity}% </h4>`
+
+            var displayDayThree = document.getElementById('day3')
+            displayDayThree.innerHTML = `<h1> ${dayjs.unix(fiveDaystorage[2].date).format('MM/DD/YYYY')} </h1>
+            <img src='https://openweathermap.org/img/wn/${fiveDaystorage[2].icon}@2x.png' width='100' height='100'>
+            <h4> ${fiveDaystorage[2].temp}°F </h4>
+            <h4> ${fiveDaystorage[2].wind} m/s </h4>
+            <h4> ${fiveDaystorage[2].humidity}% </h4>`
+
+            var displayDayFour = document.getElementById('day4')
+            displayDayFour.innerHTML = `<h1> ${dayjs.unix(fiveDaystorage[3].date).format('MM/DD/YYYY')} </h1>
+            <img src='https://openweathermap.org/img/wn/${fiveDaystorage[3].icon}@2x.png' width='100' height='100'>
+            <h4> ${fiveDaystorage[3].temp}°F </h4>
+            <h4> ${fiveDaystorage[3].wind} m/s </h4>
+            <h4> ${fiveDaystorage[3].humidity}% </h4>`
+
+            var displayDayFive = document.getElementById('day5')
+            displayDayFive.innerHTML = `<h1> ${dayjs.unix(fiveDaystorage[4].date).format('MM/DD/YYYY')} </h1>
+            <img src='https://openweathermap.org/img/wn/${fiveDaystorage[4].icon}@2x.png' width='100' height='100'>
+            <h4> ${fiveDaystorage[4].temp}°F </h4>
+            <h4> ${fiveDaystorage[4].wind} m/s </h4>
+            <h4> ${fiveDaystorage[4].humidity}% </h4>`
+        
+            
+})
+    }
 //FUNCTIONS
 
 // Capture Inputted Search City
@@ -131,10 +166,10 @@ function getTodaysdata(cityNameformatted) {
     }
        
 
-    }
+    
   
 
         
         
-        console.log(dayjs.unix(1318781876).format('MM/DD/YYYY'))
+
      
