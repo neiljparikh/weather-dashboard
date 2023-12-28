@@ -2,6 +2,7 @@
 var citySearchform = document.getElementById('city-search-form');
 var cityHeading = document.getElementById('city-searched-heading');
 var APIKey = "272144b5a50ef7e9a6cec649a29117c0";
+var pastSearches = document.getElementById('past-searches')
 todaysDate = dayjs().format("MM/DD/YYYY");
 
 //FUNCTIONS
@@ -14,8 +15,41 @@ document.getElementById("city-search-form").addEventListener("submit", function(
     var cityNameformatted = cityName.split(" ").join("+")
     getTodaysdata(cityNameformatted);
     getFivedaydata(cityNameformatted);
+    saveSearch(cityName);
 
 });
+
+
+// limit this to the most recent 5 searches <-------------------------------
+function renderSearch() {
+    var existingSearches = JSON.parse(localStorage.getItem("Past Searches")) || [];
+
+    var renderedCities = [];
+    for (var i=0; i <existingSearches.length; i++) {
+        var city = existingSearches[i];
+            if (!renderedCities.includes(city)) {
+                var citySearched = document.createElement("li");
+                citySearched.textContent = city;
+                pastSearches.append(citySearched);
+                renderedCities.push(city);
+    }}
+
+}
+
+
+renderSearch()
+
+function saveSearch(cityName) {
+    // Get the existing searches from local storage. If there are no existing searches, create an array
+    var existingSearches = JSON.parse(localStorage.getItem("Past Searches")) || [];
+
+    // If there are existing searches, parse them into an array
+    // Add the new city to the array of searches
+    existingSearches.push(cityName);
+    
+    // Save the updated array back to local storage
+    localStorage.setItem("Past Searches", JSON.stringify(existingSearches));
+}
 
 // API Call
 function getTodaysdata(cityNameformatted) {
@@ -79,7 +113,7 @@ function getTodaysdata(cityNameformatted) {
         console.log(fiveDaystorage[0].date)
     }
   
-       
+
             var displayDayOne = document.getElementById('day1')
             displayDayOne.innerHTML = `<h1> ${dayjs.unix(fiveDaystorage[0].date).format('MM/DD/YYYY')} </h1>
             <img src='https://openweathermap.org/img/wn/${fiveDaystorage[0].icon}@2x.png' width='100' height='100'>
@@ -122,15 +156,7 @@ function getTodaysdata(cityNameformatted) {
 //FUNCTIONS
 
 // Capture Inputted Search City
-document.getElementById("city-search-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var cityName = document.getElementById('city-inputted').value;
-    //Code below solves for formatting issues when enterting cities that are more than one word
-    var cityNameformatted = cityName.split(" ").join("+")
-    getTodaysdata(cityNameformatted);
-    getFivedaydata(cityNameformatted);
 
-});
 
 // API Call
 function getTodaysdata(cityNameformatted) {
@@ -167,7 +193,7 @@ function getTodaysdata(cityNameformatted) {
        
 
     
-  
+    
 
         
         
